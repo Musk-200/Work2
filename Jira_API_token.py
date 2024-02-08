@@ -2,23 +2,22 @@ import requests
 import json
 import pandas as pd
 # read by default 1st sheet of an excel file
-df = pd.read_excel('Untitled spreadsheet.xlsx')
+df = pd.read_excel('Customer_And_Components_Name.xlsx')
 print(df)
-df= df.drop('UserId', axis = 1)
 url="https://ibm-team-uz9mmme2.atlassian.net//rest/api/2/issue"
 headers={
     "Accept": "application/json",
     "Content-Type": "application/json"
 }
-for index, row in df.iterrows():
-   user_issue = row['UserName']
-   user_description = row['User_location']
+for index, row in df.iterrows(0,9):
+   user_issue = row['Components']
+   user_description = row['Customer_name']
    payload=json.dumps(
    {
       "fields": {
          "project":
          {
-            "key": "TUA"
+            "key": "JN"
          },
          "summary": user_issue ,
          "description": user_description,
@@ -28,6 +27,6 @@ for index, row in df.iterrows():
       }
    }
    )
-   response=requests.post(url,headers=headers,data=payload,auth=("muskan.kumari@ibm.com","ATATT3xFfGF07mPLpPoNcUU91HNt3kZ34FPgXpDULINWmMIk3vCCcfNxt8TLAE0Zo3Lkxsd1bx1EeWI7ngHZ6IpKqxUIy8YVdQuWVtHC6HXURhLxrZEWJpXIzWsj3FQJwuZF4R4CwPSltrll6ReTOJvPmxPBn2lWywvAsUHrEm9XG5G4yHsb1fs=5672298C"))
+   response=requests.post(url,headers=headers,data=payload,auth=("muskan.kumari@ibm.com","ATATT3xFfGF0uFCv02vcXggFqjNvvhAaozymJrShRLW2nrmBnzUZ1gLyl4X1AIq3pD9hRmWPDJogbufjbLSwQCfIVD8MV-DrJtXg4-9M4JqTrIKhPFWxnwNaoBlkNIy7vjR_mAOXE-pLmZvzYVpUCaC1Svt6awnHiSFA4wi0xCqjYnml2zf2Uuk=9121D468"))
    data=response.json()
    print(data["id"])
