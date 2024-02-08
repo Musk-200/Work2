@@ -2,14 +2,14 @@ import requests
 import json
 import pandas as pd
 # read by default 1st sheet of an excel file
-df = pd.read_excel('Customer_And_Components_Name.xlsx')
+df = pd.read_excel('Book3.xlsx')
 print(df)
 url="https://ibm-team-uz9mmme2.atlassian.net//rest/api/2/issue"
 headers={
     "Accept": "application/json",
     "Content-Type": "application/json"
 }
-for index, row in df.iterrows(0,9):
+for index, row in df.iterrows():
    user_issue = row['Components']
    user_description = row['Customer_name']
    payload=json.dumps(
